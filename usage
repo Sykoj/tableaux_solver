@@ -1,0 +1,81 @@
+=========================================================
+= Tableaux method solver for prepositional logic, usage =
+=========================================================
+
+========================
+1. commandline arguments
+========================
+
+	- no provided parameters:
+			output: standart output (console)
+			input:  standart input  (console)
+
+	-i	[input file]
+	-o	[output file]
+
+================
+2. program input
+================
+	
+	Input consists of sequence of formulas, each on single line.
+	Each formula must be prefixed with truth value true 'T' or false 'F'.
+	Format of formulas is explained later.
+
+	Program allows user to use tableaux method for typical problems in prepositional logic:
+		(and examples can be found in 'examples' file)
+
+		(i) Tableaux proof of formula A
+		
+			1th input line:
+				F(A)
+		
+		(ii) Tableaux proof of formula A from theory T
+			
+			1th input line: 
+				F(A)
+			(2 - n+1)th input line: 
+				T(t[i]), 't[i]' is axiom of theory T with 'n' axioms
+		
+		(iii) Finding all models of theory T
+
+			(1 - n)th input line: 
+				T(t[i]), 't[i]' is axiom of theory T with 'n' axioms
+
+	For console, input is finished by blank empty line or 'EOF mark' on newline.
+		
+		EOF mark:
+			(control + Z) Windows
+			(control + D) Unix
+
+
+	Formulas
+	========
+
+		Logical junctions are represented by
+	
+		NOT for negation:			(NOT p)
+		AND for conjunction:		(p AND q)
+		OR for disjunction:			(p OR q)
+		IMP for implication:		(p IMP q)
+		EKV for equivalence:		(p EKV q)
+
+		(variables 'p', 'q' were used)
+
+		Formulas are defined by this inductive set of rules:
+			(1) each variable is formula
+			(2) if A and B are formulas, then (NOT A), (A AND B), (A OR B), (A IMP B), (A EKV B) are formulas
+			(3) each formula is created by usage of rules (1) and (2)
+
+		Variables can be only single lowercase characters.
+		For better readability, there can be many spaces as needed for each formula between parenthesis. 
+
+	If formula is not well-defined or input is corrupted, then "Input format error" message is written to standart output.
+
+=================
+3. program output
+=================
+	
+	If input was correct, then tableaux in it's regular tree form is provided.
+	Contradiction is marked by symbol 'X'.
+	For readability, implication is '->'
+					 equivalence is '<->'
