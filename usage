@@ -53,9 +53,9 @@
 
 		Logical junctions are represented by
 	
-		NOT for negation:			(NOT p)
+		NOT for negation:		(NOT p)
 		AND for conjunction:		(p AND q)
-		OR for disjunction:			(p OR q)
+		OR for disjunction:		(p OR q)
 		IMP for implication:		(p IMP q)
 		EKV for equivalence:		(p EKV q)
 
@@ -78,4 +78,4 @@
 	If input was correct, then tableaux in it's regular tree form is provided.
 	Contradiction is marked by symbol 'X'.
 	For readability, implication is '->'
-					 equivalence is '<->'
+			 equivalence is '<->'
