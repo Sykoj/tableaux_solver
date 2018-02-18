@@ -42,7 +42,7 @@ namespace tableaux {
 					}
 
 					// copy formula characters into line for printing formulas
-					for (int i = 0; i < formula.length(); i++) {
+					for (size_t i = 0; i < formula.length(); i++) {
 
 						line_formulas[tableaux_tree_node->print_start_index_ + i] = formula[i];
 					}
@@ -54,7 +54,7 @@ namespace tableaux {
 						// create node connections
 						if (tableaux_tree_node->childs_.size() == 2)
 
-							for (int i = tableaux_tree_node->childs_[0]->print_mark_index_; i <= tableaux_tree_node->childs_[1]->print_mark_index_; i++) {
+							for (size_t i = tableaux_tree_node->childs_[0]->print_mark_index_; i <= tableaux_tree_node->childs_[1]->print_mark_index_; i++) {
 								line_connections[i] = '-';
 							}
 						// no node connection -> lengthen mark instead
@@ -67,7 +67,7 @@ namespace tableaux {
 				}
 
 				// continue BFS with child nodes
-				for (int i = 0; i < tableaux_tree_node->childs_.size(); i++) {
+				for (size_t i = 0; i < tableaux_tree_node->childs_.size(); i++) {
 
 					new_items.push_back(tableaux_tree_node->childs_[i].get());
 				}
@@ -95,7 +95,7 @@ namespace tableaux {
 		// Length of subtree, will be compared with length of current formula
 		size_t subtree_print_length = 0;
 
-		for (int i = 0; i < it->childs_.size(); i++) {
+		for (size_t i = 0; i < it->childs_.size(); i++) {
 
 			// Child's formula is nullptr -> contradiction
 			if (it->childs_[i]->formula_ptr_ == nullptr) {
@@ -147,7 +147,7 @@ namespace tableaux {
 
 		// get total print length of subtree
 		size_t subtree_count = 0;
-		for (int i = 0; i < it->childs_.size(); i++) {
+		for (size_t i = 0; i < it->childs_.size(); i++) {
 
 			subtree_count += it->childs_[i]->subtree_horizontal_length_;
 		}
@@ -156,7 +156,7 @@ namespace tableaux {
 		// align subtree to the centre of allowed range
 		offset = ((end - start) - subtree_count) / 2;
 
-		for (int i = 0; i < it->childs_.size(); i++) {
+		for (size_t i = 0; i < it->childs_.size(); i++) {
 
 			// for each child node, set allowed range and continue recursion
 			calculate_formula_line_offsets(it->childs_[i].get(), offset + start, offset + start + it->childs_[i]->subtree_horizontal_length_);
@@ -186,7 +186,7 @@ namespace tableaux {
 		}
 	
 		// recursively continue
-		for (int i = 0; i < it->childs_.size(); i++) {
+		for (size_t i = 0; i < it->childs_.size(); i++) {
 			calculate_mark_line_offsets(it->childs_[i].get());
 		}
 	}
