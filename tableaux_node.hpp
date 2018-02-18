@@ -29,7 +29,7 @@ class tableaux_tree_node {
 		formula_ptr_(formula_ptr),
 		truth_value_(truth_value),
 		parent_(nullptr),
-		print_length_(0),
+		subtree_horizontal_length_(0),
 		print_start_index_(0),
 		print_mark_index_(0) {}
 
@@ -37,7 +37,7 @@ class tableaux_tree_node {
 		
 		formula_ptr_ = node.formula_ptr_;
 		truth_value_ = node.truth_value_;
-		print_length_ = node.print_length_;
+		subtree_horizontal_length_ = node.subtree_horizontal_length_;
 		parent_ = node.parent_;
 		
 		for (const auto& child : node.childs_)
@@ -50,7 +50,7 @@ class tableaux_tree_node {
 
 		formula_ptr_ = node.formula_ptr_;
 		truth_value_ = node.truth_value_;
-		print_length_ = node.print_length_;
+		subtree_horizontal_length_ = node.subtree_horizontal_length_;
 		parent_ = node.parent_;
 
 		for (const auto& child : node.childs_)
@@ -63,7 +63,7 @@ class tableaux_tree_node {
 		tableaux_tree_node* parent_;
 		std::vector<tree_node_ptr> childs_;
 
-		size_t print_length_;
+		size_t subtree_horizontal_length_;
 		size_t print_start_index_;
 		size_t print_mark_index_;
 };

@@ -10,9 +10,12 @@ namespace tableaux {
 	public:
 		static void print_tableaux(tableaux_tree_node* root, std::ostream& output);
 	private:
-		static size_t calculate_bounds(tableaux_tree_node* root);
-		static void calculate_formula_offsets(tableaux_tree_node* root, size_t start, size_t end);
-		static void calculate_mark_offsets(tableaux_tree_node* root);
+		// calculates horizotnal length of subtree with node as root for printing
+		static size_t calculate_subtree_block_length(tableaux_tree_node* root);
+		
+		static void calculate_formula_line_offsets(tableaux_tree_node* root, size_t start, size_t end);
+		static void calculate_mark_line_offsets(tableaux_tree_node* root);
+		static const size_t gap_ = 10; // length of gap between forked branches
 	};
 }
 

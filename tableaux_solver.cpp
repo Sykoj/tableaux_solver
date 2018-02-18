@@ -32,7 +32,7 @@ namespace tableaux {
 		getline(std::cin, line);
 
 		if (line.empty()) throw std::invalid_argument("Input format error");
-		add_root_formula(line.substr(1), get_truth_value(line[0]));
+			add_root_formula(line.substr(1), get_truth_value(line[0]));
 
 		while (getline(std::cin, line)) {
 
@@ -40,9 +40,10 @@ namespace tableaux {
 			add_axiom(line.substr(1));
 		}
 
-		auto root_item = std::make_unique<tableaux_tree_node>(root_formula_.get(), root_formula_truth_value_);
+		auto root_node = std::make_unique<tableaux_tree_node>(root_formula_.get(), root_formula_truth_value_);
 
-		initial_branch_.head_ = root_item.get();
+		// Start of tableaux method algorithm
+		initial_branch_.head_ = root_node.get();
 		for (const auto& axiom : theory_axioms_)
 			initial_branch_.axiom_queue_.emplace(axiom.get(), true);
 
@@ -58,7 +59,8 @@ namespace tableaux {
 				branches.push(branch);
 			}
 		}
+		// End of tableaux method algorithm
 		
-		tableaux_printer::print_tableaux(root_item.get(), output);
+		tableaux_printer::print_tableaux(root_node.get(), output);
 	}
 }
