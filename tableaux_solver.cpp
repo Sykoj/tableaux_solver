@@ -1,15 +1,13 @@
 #include "tableaux_solver.hpp"
 #include "formula_parser.hpp"
 #include "tableaux_printer.hpp"
-#include <queue>
 #include "formula.hpp"
-#include "item.hpp"
-#include "branch.hpp"
+#include "tableaux_node.hpp"
+#include "tableaux_branch.hpp"
+#include <queue>
 #include <iostream>
 #include <istream>
 #include <ostream>
-
-using namespace tableaux;
 
 namespace tableaux {
 
@@ -49,13 +47,13 @@ namespace tableaux {
 		}
 
 
-		auto root_item = std::make_unique<item>(root_formula_.get(), root_formula_truth_value_);
+		auto root_item = std::make_unique<tableaux_tree_node>(root_formula_.get(), root_formula_truth_value_);
 
 		initial_branch_.head_ = root_item.get();
 		for (const auto& axiom : theory_axioms_)
 			initial_branch_.axiom_queue_.emplace(axiom.get(), true);
 
-		std::queue<branch> branches;
+		std::queue<tableaux_branch> branches;
 		branches.push(initial_branch_);
 
 		while (!branches.empty()) {

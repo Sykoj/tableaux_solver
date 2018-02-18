@@ -1,13 +1,13 @@
 #ifndef  FORMULA_PARSER_HPP_
 #define  FORMULA_PARSER_HPP_
-#include "token.hpp"
+#include "formula_parse_token.hpp"
 #include "formula.hpp"
 #include <string>
 #include <vector>
 
 namespace tableaux {
 
-	using tokens = std::vector<token>;
+	using tokens = std::vector<parse_token>;
 
 	class formula_parser {
 
@@ -18,8 +18,8 @@ namespace tableaux {
 		static formula_ptr assemble_formula(const tokens& tokens);
 		static formula_ptr get_binary_formula(const tokens& tokens);
 		static formula_ptr get_unary_formula(const tokens& tokens);
-		static formula_ptr get_variable(const token& token);
-		static formula_ptr get_subformula(const token& token);
+		static formula_ptr get_variable(const parse_token& token);
+		static formula_ptr get_subformula(const parse_token& token);
 	};
 }
 

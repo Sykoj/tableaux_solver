@@ -13,25 +13,25 @@ namespace tableaux {
 
 		const std::string& set_string_representation() override {
 			
-			string_representation = symbol_;
-			return string_representation;
+			string_representation_ = symbol_;
+			return string_representation_;
 		}
 
-		std::vector<branch> atomic_fork(branch& previous_branch, const item& developed) const override  {
+		std::vector<tableaux_branch> atomic_fork(tableaux_branch& previous_branch, const tableaux_tree_node& developed) const override  {
 
-			std::vector<branch> branches;
+			std::vector<tableaux_branch> branches;
 
-			if (previous_branch.contains_literal(std::make_pair(!developed.truth_value, symbol_))) {
+			if (previous_branch.contains_literal(std::make_pair(!developed.truth_value_, symbol_))) {
 				
-				previous_branch.head_->childs.push_back(std::make_unique<item>(nullptr, false));
-				previous_branch.head_->childs[0]->parent = previous_branch.head_;
+				previous_branch.head_->childs_.push_back(std::make_unique<tableaux_tree_node>(nullptr, false));
+				previous_branch.head_->childs_[0]->parent_ = previous_branch.head_;
 				return branches;
 			}
 			else {
-				previous_branch.add_literal(std::make_pair(developed.truth_value, symbol_));
+				previous_branch.add_literal(std::make_pair(developed.truth_value_, symbol_));
 			}
 
-			item* ptr_ = previous_branch.head_;
+			tableaux_tree_node* ptr_ = previous_branch.head_;
 
 			if (previous_branch.has_formula_queue_empty()) {
 
@@ -39,14 +39,14 @@ namespace tableaux {
 					return branches;
 				}
 
-				previous_branch.head_->childs.push_back(std::make_unique<item>(previous_branch.get_axiom_queue_top()));
+				previous_branch.head_->childs_.push_back(std::make_unique<tableaux_tree_node>(previous_branch.get_axiom_queue_top()));
 			}
 			else {
-				previous_branch.head_->childs.push_back(std::make_unique<item>(previous_branch.get_formula_queue_top()));
+				previous_branch.head_->childs_.push_back(std::make_unique<tableaux_tree_node>(previous_branch.get_formula_queue_top()));
 			}
 
-			previous_branch.head_ = previous_branch.head_->childs[previous_branch.head_->childs.size() - 1].get();
-			previous_branch.head_->parent = ptr_;
+			previous_branch.head_ = previous_branch.head_->childs_[previous_branch.head_->childs_.size() - 1].get();
+			previous_branch.head_->parent_ = ptr_;
 			branches.push_back(previous_branch);
 			return branches;
 		}

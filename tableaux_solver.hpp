@@ -30,9 +30,8 @@ namespace tableaux {
 		bool root_formula_truth_value_;
 		
 		std::vector<formula_ptr> theory_axioms_;
-		branch initial_branch_;
+		tableaux_branch initial_branch_;
 	};
-
 }
 
 #endif
