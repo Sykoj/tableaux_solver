@@ -28,24 +28,17 @@ namespace tableaux {
 	void solver::solve(std::istream& input, std::ostream& output) {
 		
 		std::string line;
+	
+		getline(std::cin, line);
 
-		try {
-			getline(std::cin, line);
+		if (line.empty()) throw std::invalid_argument("Input format error");
+		add_root_formula(line.substr(1), get_truth_value(line[0]));
+
+		while (getline(std::cin, line)) {
 
 			if (line.empty()) throw std::invalid_argument("Input format error");
-			add_root_formula(line.substr(1), get_truth_value(line[0]));
-
-			while (getline(std::cin, line)) {
-
-				if (line.empty()) throw std::invalid_argument("Input format error");
-				add_axiom(line.substr(1));
-			}
+			add_axiom(line.substr(1));
 		}
-		catch (std::invalid_argument e) {
-			std::cout << e.what() << std::endl;
-			return;
-		}
-
 
 		auto root_item = std::make_unique<tableaux_tree_node>(root_formula_.get(), root_formula_truth_value_);
 

@@ -4,6 +4,7 @@ namespace tableaux {
 
 	parse_token parse_token::try_get_token_and_iterate_over(string_const_iter& it, const string_const_iter& end) {
 
+		// Group of functions to get token from string and moves iterator of string behind end of current token
 		if (*it == '(') return get_unparsed_subformula_and_iterate_through(it, end);
 		if (isupper(*it)) return get_junction_and_iterate_through(it, end);
 		if (islower(*it)) return get_variable_and_iterate_through(it);
