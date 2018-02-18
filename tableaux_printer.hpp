@@ -10,7 +10,7 @@ namespace tableaux {
 	public:
 		static void print_tableaux(tableaux_tree_node* root, std::ostream& output);
 	private:
-		// calculates horizotnal length of subtree with node as root for printing
+		// calculates horizontal length of subtree with node as root for printing
 		static size_t calculate_subtree_block_length(tableaux_tree_node* root);
 		
 		static void calculate_formula_line_offsets(tableaux_tree_node* root, size_t start, size_t end);
